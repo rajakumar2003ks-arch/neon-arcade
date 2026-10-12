@@ -3,199 +3,256 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080814">
 <title>NEON ARCADE | Play Beyond Limits</title>
 <style>
-:root{--bg:#080b14;--panel:#121a2b;--cyan:#61f5ff;--purple:#a78bfa;--muted:#a8b3c7}
+:root{--bg:#080814;--panel:#14142b;--line:#303052;--cyan:#69f5ff;--pink:#ff64d8;--purple:#a68bff;--muted:#adb0ce}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:#f4f7ff;font-family:Arial,sans-serif}
-header{position:sticky;top:0;background:#080b14ee;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #29334a;z-index:5}
-.logo{font-weight:900;font-size:21px;color:var(--cyan)}
-nav{display:flex;gap:18px}
-nav a{color:white;text-decoration:none;font-size:14px}
-.hero{text-align:center;padding:70px 16px;background:radial-gradient(ellipse at top,#293365,#080b14 70%)}
-.tag{color:var(--cyan);letter-spacing:3px;font-size:12px}
-h1{font-size:clamp(42px,8vw,78px);line-height:1.05;margin:18px 0}
-h1 span{color:var(--cyan)}
-p{line-height:1.6}
-.muted{color:var(--muted)}
-button{cursor:pointer;font:inherit;font-weight:bold;border-radius:9px;padding:12px 17px;border:0;transition:.15s}
-button:hover{filter:brightness(1.12)}
-.primary{background:var(--cyan);color:#071018}
-.secondary{background:#26334c;color:white;border:1px solid #40506d}
-section{padding:35px 6%;scroll-margin-top:75px}
-.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-h2{margin:0;font-size:25px}
-.games{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
-.card,.panel{background:linear-gradient(145deg,#172238,#101522);border:1px solid #2a3650;border-radius:16px;padding:19px}
-.art{height:100px;display:grid;place-items:center;font-size:49px;border-radius:11px;background:radial-gradient(circle,#293c60,#101522);margin-bottom:15px}
-.pill{font-size:11px;color:var(--cyan);background:#15303b;padding:5px 9px;border-radius:20px}
-.card h3{margin:12px 0}
-.card p{font-size:14px;color:var(--muted);min-height:45px}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:#f7f5ff;font-family:Arial,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#080814ed;backdrop-filter:blur(12px);padding:16px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
+.logo{font-weight:900;color:var(--cyan);font-size:20px}
+nav{display:flex;gap:16px}nav a{color:white;text-decoration:none;font-size:13px}
+.hero{text-align:center;padding:65px 15px;background:radial-gradient(ellipse at top,#37306b,#080814 70%)}
+.tag,.pill{color:var(--cyan);font-size:11px;letter-spacing:1px}
+h1{font-size:clamp(42px,8vw,78px);line-height:1;margin:22px 0}
+.gradient{background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));background-clip:text;color:transparent}
+p{line-height:1.6}.muted{color:var(--muted)}
+button{cursor:pointer;font:inherit;font-weight:bold;border-radius:10px;padding:12px 15px;transition:.15s}
+button:hover{filter:brightness(1.15);transform:translateY(-1px)}
+button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.primary{background:var(--cyan);color:#080814;border:0}
+.secondary{background:#252541;color:white;border:1px solid #414168}
+section{padding:30px 5%}
+.head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:20px}
+h2{font-size:25px;margin:0}
+.games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.card{background:linear-gradient(145deg,#1a1a38,#101020);border:1px solid var(--line);border-radius:16px;padding:15px;min-width:0}
+.card:hover{border-color:var(--cyan);box-shadow:0 8px 30px #0004}
+.art{height:95px;display:grid;place-items:center;font-size:47px;background:radial-gradient(circle,#37325f,#17172d);border-radius:12px;margin-bottom:13px}
+.card h3{margin:10px 0}.card p{font-size:13px;color:var(--muted);min-height:40px}
 .card button{width:100%}
-.panel{max-width:760px;margin:auto;padding:20px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.stats{display:flex;gap:9px;margin:20px 0}
-.stat{flex:1;text-align:center;padding:12px 4px;background:#080d18;border:1px solid #29354c;border-radius:10px;color:var(--muted);font-size:12px}
-.stat strong{display:block;color:var(--cyan);font-size:24px;margin-top:7px}
-.arena{height:270px;position:relative;background:#080d18;border:1px solid #29354c;border-radius:12px;overflow:hidden}
-#target{display:none;position:absolute;width:44px;height:44px;border-radius:50%;background:var(--cyan);border:4px solid white;box-shadow:0 0 20px var(--cyan);padding:0}
-.center{text-align:center}
-.controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:15px 0}
-#snakeCanvas{display:block;width:100%;max-width:400px;margin:auto;border-radius:12px;background:#080d18}
-.board{display:grid;grid-template-columns:repeat(3,85px);justify-content:center;gap:8px;margin:22px auto}
-.cell{width:85px;height:85px;background:#080d18;color:var(--cyan);border:1px solid #34435d;font-size:35px}
-.memory{display:grid;grid-template-columns:repeat(4,65px);justify-content:center;gap:8px;margin:22px auto}
-.memcard{height:65px;background:#26334c;color:var(--cyan);font-size:24px;border:1px solid #40506d;padding:5px}
-.memcard.matched{background:#16423e}
+.pill{display:inline-block;background:#17303a;padding:5px 8px;border-radius:20px}
+.panel{max-width:750px;margin:auto;padding:20px;background:linear-gradient(145deg,#191932,#10101f);border:1px solid #353558;border-radius:18px}
+.gamehead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.stats{display:flex;gap:8px;margin:18px 0}
+.stat{flex:1;text-align:center;background:#090919;border:1px solid var(--line);border-radius:10px;padding:11px 3px;font-size:10px;color:var(--muted)}
+.stat strong{display:block;color:var(--cyan);font-size:23px;margin-top:7px}
+.arena{height:260px;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#090919}
+#target{display:none;position:absolute;width:44px;height:44px;border:4px solid white;border-radius:50%;background:var(--cyan);box-shadow:0 0 20px var(--cyan);padding:0}
+canvas{display:block;width:100%;max-width:400px;height:auto;margin:auto;background:#090919;border-radius:12px;touch-action:none}
+.controls{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:15px 0}
+.board{display:grid;grid-template-columns:repeat(3,78px);justify-content:center;gap:8px;margin:20px auto}
+.cell{width:78px;height:78px;font-size:32px;color:var(--cyan);background:#090919;border:1px solid #424267;padding:0}
+.memory{display:grid;grid-template-columns:repeat(4,60px);justify-content:center;gap:8px;margin:20px auto}
+.memcard{height:60px;font-size:24px;background:#252541;color:var(--cyan);border:1px solid #46466b;padding:3px}
+.matched{background:#17453b!important}
+#whackBoard{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:390px;margin:20px auto}
+.hole{font-size:30px;height:78px;background:#242440;border:1px solid #414168;padding:0}
+#numberBoard{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;max-width:330px;margin:20px auto}
+.tile{height:64px;padding:0;background:#282744;color:white;border:1px solid #474466;font-size:20px}
+.tile.filled{background:#31535e;color:var(--cyan)}
 .hidden{display:none!important}
 .note{text-align:center;color:var(--muted);font-size:13px}
-footer{text-align:center;color:var(--muted);padding:25px;border-top:1px solid #29334a}
-@media(max-width:800px){.games{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:450px){header{padding:15px 4%}.logo{font-size:16px}nav{gap:9px}nav a{font-size:12px}section{padding:25px 4%}.card{padding:12px}.art{height:78px;font-size:39px}.panel{padding:12px}.stats{gap:5px}.stat{font-size:10px}.stat strong{font-size:21px}}
+.about{text-align:center;background:#14142a;border:1px solid var(--line);border-radius:16px;padding:28px}
+footer{text-align:center;padding:25px;color:var(--muted);border-top:1px solid var(--line);font-size:12px}
+@media(max-width:750px){.games{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:430px){header{padding:14px 3%}.logo{font-size:15px}nav{gap:9px}nav a{font-size:12px}.games{gap:9px}.card{padding:10px}.art{height:75px;font-size:38px}section{padding:24px 3%}.panel{padding:12px}.stats{gap:4px}.stat{font-size:9px}.stat strong{font-size:20px}}
 </style>
 </head>
 <body>
 <header>
-<div class="logo">⚡ NEON ARCADE</div>
-<nav><a href="#games">Games</a><a href="#play">Play</a><a href="#about">About</a></nav>
+ <div class="logo">⚡ NEON ARCADE</div>
+ <nav><a href="#games">Games</a><a href="#play">Play</a><a href="#about">About</a></nav>
 </header>
 
 <div class="hero">
-<div class="tag">YOUR FREE GAMING UNIVERSE</div>
-<h1>PLAY <span>BEYOND</span><br>LIMITS.</h1>
-<p class="muted">4 mini games. No downloads. Just fun.</p>
-<button class="primary" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">EXPLORE GAMES ↓</button>
+ <span class="tag">✦ YOUR FREE GAMING UNIVERSE</span>
+ <h1>PLAY <span class="gradient">BEYOND</span><br>LIMITS.</h1>
+ <p class="muted">9 games. Zero downloads. Unlimited fun.</p>
+ <button class="primary" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">EXPLORE GAMES ↓</button>
 </div>
 
 <section id="games">
-<div class="head"><h2>🎮 Arcade Zone</h2><span class="pill">4 GAMES</span></div>
-<div class="games">
-<div class="card"><div class="art">🎯</div><span class="pill">REACTION</span><h3>Click Rush</h3><p>Hit the glowing target in 15 seconds.</p><button class="primary" onclick="openGame('click')">PLAY NOW</button></div>
-<div class="card"><div class="art">🐍</div><span class="pill">ARCADE</span><h3>Neon Snake</h3><p>Eat food and grow without crashing.</p><button class="primary" onclick="openGame('snake')">PLAY NOW</button></div>
-<div class="card"><div class="art">⭕</div><span class="pill">2 PLAYERS</span><h3>Tic-Tac-Toe</h3><p>Get three symbols in a row.</p><button class="primary" onclick="openGame('ttt')">PLAY NOW</button></div>
-<div class="card"><div class="art">🧠</div><span class="pill">PUZZLE</span><h3>Memory Match</h3><p>Find all eight matching pairs.</p><button class="primary" onclick="openGame('memory')">PLAY NOW</button></div>
-</div>
+ <div class="head"><h2>🎮 Arcade Zone</h2><span class="pill">09 GAMES</span></div>
+ <div class="games">
+  <article class="card"><div class="art">🎯</div><span class="pill">REACTION</span><h3>Click Rush</h3><p>Hit the target in 15 seconds.</p><button class="primary" onclick="openGame('click')">PLAY NOW</button></article>
+  <article class="card"><div class="art">🐍</div><span class="pill">ARCADE</span><h3>Neon Snake</h3><p>Eat food and avoid crashing.</p><button class="primary" onclick="openGame('snake')">PLAY NOW</button></article>
+  <article class="card"><div class="art">⭕</div><span class="pill">2 PLAYERS</span><h3>Tic-Tac-Toe</h3><p>Get three symbols in a row.</p><button class="primary" onclick="openGame('ttt')">PLAY NOW</button></article>
+  <article class="card"><div class="art">🧠</div><span class="pill">PUZZLE</span><h3>Memory Match</h3><p>Find all matching pairs.</p><button class="primary" onclick="openGame('memory')">PLAY NOW</button></article>
+  <article class="card"><div class="art">🚀</div><span class="pill">SHOOTER</span><h3>Space Shooter</h3><p>Blast incoming space enemies.</p><button class="primary" onclick="openGame('space')">PLAY NOW</button></article>
+  <article class="card"><div class="art">🧱</div><span class="pill">ARCADE</span><h3>Brick Breaker</h3><p>Break every brick with the ball.</p><button class="primary" onclick="openGame('brick')">PLAY NOW</button></article>
+  <article class="card"><div class="art">🐹</div><span class="pill">REACTION</span><h3>Whack-a-Mole</h3><p>Catch the mole before it hides.</p><button class="primary" onclick="openGame('whack')">PLAY NOW</button></article>
+  <article class="card"><div class="art">🔢</div><span class="pill">BRAIN</span><h3>2048 Puzzle</h3><p>Merge matching numbers to reach 2048.</p><button class="primary" onclick="openGame('number')">PLAY NOW</button></article>
+  <article class="card"><div class="art">✊</div><span class="pill">QUICK GAME</span><h3>Rock Paper Scissors</h3><p>Challenge the computer.</p><button class="primary" onclick="openGame('rps')">PLAY NOW</button></article>
+ </div>
 </section>
 
-<section id="play">
-<div class="panel">
-<div class="top"><h2 id="title">🎯 Click Rush</h2><button class="secondary" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">← All Games</button></div>
-<p id="help" class="muted">Hit the target as many times as you can!</p>
+<section id="play"><div class="panel">
+ <div class="gamehead"><h2 id="gameTitle">🎯 Click Rush</h2><button class="secondary" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">← All Games</button></div>
+ <p id="help" class="muted">Hit the target as often as you can!</p>
 
-<div id="clickGame">
-<div class="stats"><div class="stat">SCORE<strong id="cs">0</strong></div><div class="stat">TIME<strong id="ct">15</strong></div><div class="stat">BEST<strong id="cb">0</strong></div></div>
-<div class="arena" id="arena"><button id="target" aria-label="Hit target"></button></div>
-<div class="controls"><button class="primary" id="cstart">START GAME</button></div><p id="cmsg" class="note">Ready, player one?</p>
-</div>
+ <div id="clickGame">
+  <div class="stats"><div class="stat">SCORE<strong id="cs">0</strong></div><div class="stat">TIME<strong id="ct">15</strong></div><div class="stat">BEST<strong id="cb">0</strong></div></div>
+  <div class="arena" id="arena"><button id="target" aria-label="Hit target"></button></div>
+  <div class="controls"><button class="primary" id="cstart">START GAME</button></div><p id="cmsg" class="note">Ready?</p>
+ </div>
 
-<div id="snakeGame" class="hidden">
-<div class="stats"><div class="stat">SCORE<strong id="ss">0</strong></div><div class="stat">BEST<strong id="sb">0</strong></div></div>
-<canvas id="canvas" width="400" height="400"></canvas>
-<div class="controls"><button class="primary" id="sstart">START SNAKE</button></div>
-<div class="controls"><button class="secondary" onclick="turn(0,-1)">↑</button></div>
-<div class="controls"><button class="secondary" onclick="turn(-1,0)">←</button><button class="secondary" onclick="turn(0,1)">↓</button><button class="secondary" onclick="turn(1,0)">→</button></div>
-<p id="smsg" class="note">Use arrow keys or buttons.</p>
-</div>
+ <div id="snakeGame" class="hidden">
+  <div class="stats"><div class="stat">SCORE<strong id="ss">0</strong></div><div class="stat">BEST<strong id="sb">0</strong></div></div>
+  <canvas id="snakeCanvas" width="400" height="400"></canvas>
+  <div class="controls"><button class="primary" id="sstart">START SNAKE</button></div>
+  <div class="controls"><button class="secondary" onclick="turn(0,-1)">↑</button></div>
+  <div class="controls"><button class="secondary" onclick="turn(-1,0)">←</button><button class="secondary" onclick="turn(0,1)">↓</button><button class="secondary" onclick="turn(1,0)">→</button></div>
+  <p id="smsg" class="note">Use arrow keys or buttons.</p>
+ </div>
 
-<div id="tttGame" class="hidden">
-<div class="stats"><div class="stat">TURN<strong id="turnLabel">X</strong></div><div class="stat">X WINS<strong id="xw">0</strong></div><div class="stat">O WINS<strong id="ow">0</strong></div></div>
-<div class="board" id="board"></div><p id="tmsg" class="note">X goes first. Play with a friend.</p>
-<div class="controls"><button class="primary" onclick="resetTTT()">NEW ROUND</button></div>
-</div>
+ <div id="tttGame" class="hidden">
+  <div class="stats"><div class="stat">TURN<strong id="turnLabel">X</strong></div><div class="stat">X WINS<strong id="xw">0</strong></div><div class="stat">O WINS<strong id="ow">0</strong></div></div>
+  <div class="board" id="board"></div><p id="tmsg" class="note">X goes first!</p>
+  <div class="controls"><button class="primary" onclick="resetTTT()">NEW ROUND</button></div>
+ </div>
 
-<div id="memoryGame" class="hidden">
-<div class="stats"><div class="stat">MOVES<strong id="moves">0</strong></div><div class="stat">PAIRS<strong id="pairs">0/8</strong></div><div class="stat">BEST<strong id="mb">—</strong></div></div>
-<div class="memory" id="memoryBoard"></div><div class="controls"><button class="primary" onclick="startMemory()">SHUFFLE & RESTART</button></div><p id="mmsg" class="note">Find all eight pairs!</p>
-</div>
-</div>
-</section>
-<section id="about" class="center"><h2>Built for gamers ⚡</h2><p class="muted">NEON ARCADE — free mini games for everyone.</p></section>
+ <div id="memoryGame" class="hidden">
+  <div class="stats"><div class="stat">MOVES<strong id="moves">0</strong></div><div class="stat">PAIRS<strong id="pairs">0/8</strong></div><div class="stat">BEST<strong id="mb">—</strong></div></div>
+  <div class="memory" id="memoryBoard"></div><div class="controls"><button class="primary" onclick="startMemory()">RESTART</button></div><p id="mmsg" class="note">Find all pairs!</p>
+ </div>
+
+ <div id="spaceGame" class="hidden">
+  <div class="stats"><div class="stat">SCORE<strong id="spScore">0</strong></div><div class="stat">LIVES<strong id="spLives">3</strong></div></div>
+  <canvas id="spaceCanvas" width="400" height="420"></canvas>
+  <div class="controls"><button class="secondary" onclick="moveShip(-1)">← LEFT</button><button class="primary" id="spStart">START / RESTART</button><button class="secondary" onclick="moveShip(1)">RIGHT →</button><button class="secondary" onclick="shoot()">FIRE ●</button></div>
+  <p class="note">Use ← → and Space to move and fire. Touch buttons also work.</p><p id="spMsg" class="note">Defend your ship!</p>
+ </div>
+
+ <div id="brickGame" class="hidden">
+  <div class="stats"><div class="stat">SCORE<strong id="brScore">0</strong></div><div class="stat">LIVES<strong id="brLives">3</strong></div></div>
+  <canvas id="brickCanvas" width="400" height="400"></canvas>
+  <div class="controls"><button class="primary" id="brStart">START / RESTART</button><button class="secondary" onclick="movePaddle(-25)">←</button><button class="secondary" onclick="movePaddle(25)">→</button></div>
+  <p class="note">Move the paddle with mouse, touch, or arrow keys.</p><p id="brMsg" class="note">Keep the ball in play!</p>
+ </div>
+
+ <div id="whackGame" class="hidden">
+  <div class="stats"><div class="stat">SCORE<strong id="whScore">0</strong></div><div class="stat">TIME<strong id="whTime">20</strong></div></div>
+  <div id="whackBoard"></div><div class="controls"><button class="primary" id="whStart">START GAME</button></div><p id="whMsg" class="note">Catch the mole in 20 seconds!</p>
+ </div>
+
+ <div id="numberGame" class="hidden">
+  <div class="stats"><div class="stat">SCORE<strong id="numScore">0</strong></div><div class="stat">BEST<strong id="numBest">0</strong></div></div>
+  <div id="numberBoard"></div><div class="controls"><button class="secondary" onclick="numberMove('up')">↑</button></div>
+  <div class="controls"><button class="secondary" onclick="numberMove('left')">←</button><button class="secondary" onclick="numberMove('down')">↓</button><button class="secondary" onclick="numberMove('right')">→</button></div>
+  <div class="controls"><button class="primary" onclick="initNumber()">NEW PUZZLE</button></div><p id="numMsg" class="note">Join matching numbers. Use arrow keys or buttons.</p>
+ </div>
+
+ <div id="rpsGame" class="hidden">
+  <div class="stats"><div class="stat">YOU<strong id="rYou">0</strong></div><div class="stat">COMPUTER<strong id="rCpu">0</strong></div></div>
+  <div class="controls"><button class="primary" onclick="playRPS('✊')">✊ ROCK</button><button class="primary" onclick="playRPS('✋')">✋ PAPER</button><button class="primary" onclick="playRPS('✌️')">✌️ SCISSORS</button></div>
+  <h2 id="rResult" class="center">Choose your move!</h2><p id="rMsg" class="note">First to any score wins? Keep playing to beat your record.</p>
+ </div>
+</div></section>
+
+<section id="about"><div class="about"><h2>Built for gamers ⚡</h2><p class="muted">Nine free mini games. No downloads. Play and have fun!</p></div></section>
 <footer>© 2026 NEON ARCADE · Play fair. Have fun.</footer>
 
 <script>
 const $=id=>document.getElementById(id);
-let current='click';
-function openGame(n){
-current=n;
-['click','snake','ttt','memory'].forEach(x=>$(x+'Game').classList.toggle('hidden',x!==n));
-$('title').textContent={click:'🎯 Click Rush',snake:'🐍 Neon Snake',ttt:'⭕ Tic-Tac-Toe',memory:'🧠 Memory Match'}[n];
-$('help').textContent={click:'Hit the target in 15 seconds.',snake:'Collect food. Avoid walls and your tail.',ttt:'Two players on the same device.',memory:'Flip cards to find matching pairs.'}[n];
-$('play').scrollIntoView({behavior:'smooth'});
-if(n==='snake')drawSnake();
-}
+let current='click',timers=[];
+function later(fn,ms){let id=setTimeout(fn,ms);timers.push(id);return id}
+function interval(fn,ms){let id=setInterval(fn,ms);timers.push(id);return id}
+function stopTimers(){timers.forEach(id=>{clearTimeout(id);clearInterval(id)});timers=[]}
 function best(k){try{return Number(localStorage.getItem(k))||0}catch(e){return 0}}
 function save(k,v){try{localStorage.setItem(k,String(v))}catch(e){}}
+function openGame(n){
+ stopTimers();running=false;snakeOn=false;spaceOn=false;brickOn=false;whOn=false;
+ current=n;
+ ['click','snake','ttt','memory','space','brick','whack','number','rps'].forEach(x=>$(x+'Game').classList.toggle('hidden',x!==n));
+ $('gameTitle').textContent={click:'🎯 Click Rush',snake:'🐍 Neon Snake',ttt:'⭕ Tic-Tac-Toe',memory:'🧠 Memory Match',space:'🚀 Space Shooter',brick:'🧱 Brick Breaker',whack:'🐹 Whack-a-Mole',number:'🔢 2048 Puzzle',rps:'✊ Rock Paper Scissors'}[n];
+ $('help').textContent='Playing: '+$('gameTitle').textContent;
+ $('play').scrollIntoView({behavior:'smooth'});
+ if(n==='snake')drawSnake();
+ if(n==='space')drawSpace();
+ if(n==='brick')drawBrick();
+ if(n==='number')renderNumber();
+ if(n==='whack')makeWhack();
+}
 
 /* CLICK RUSH */
-let score=0,time=15,running=false,clock=null;
+let score=0,time=15,running=false;
 $('cb').textContent=best('naClick');
 function moveTarget(){let a=$('arena'),t=$('target');t.style.left=Math.random()*Math.max(0,a.clientWidth-t.offsetWidth)+'px';t.style.top=Math.random()*Math.max(0,a.clientHeight-t.offsetHeight)+'px'}
 $('cstart').onclick=()=>{
-if(running)return;clearInterval(clock);score=0;time=15;running=true;
-$('cs').textContent=0;$('ct').textContent=15;$('cmsg').textContent='Go, go, go!';$('cstart').disabled=true;
-$('target').style.display='block';moveTarget();
-clock=setInterval(()=>{time--;$('ct').textContent=time;if(time<=0){clearInterval(clock);running=false;$('target').style.display='none';$('cstart').disabled=false;$('cstart').textContent='PLAY AGAIN';$('cmsg').textContent='Time up! Score: '+score;if(score>best('naClick')){save('naClick',score);$('cb').textContent=score;$('cmsg').textContent+=' — NEW BEST!'}}},1000);
+ if(running)return;score=0;time=15;running=true;$('cs').textContent=0;$('ct').textContent=15;$('cmsg').textContent='Go!';$('cstart').disabled=true;$('target').style.display='block';moveTarget();
+ interval(()=>{time--;$('ct').textContent=time;if(time<=0){running=false;$('target').style.display='none';$('cstart').disabled=false;$('cstart').textContent='PLAY AGAIN';$('cmsg').textContent='Time up! Score: '+score;if(score>best('naClick')){save('naClick',score);$('cb').textContent=score;$('cmsg').textContent+=' — NEW BEST!';}stopTimers()}},1000)
 };
 $('target').onclick=()=>{if(running){score++;$('cs').textContent=score;moveTarget()}};
 
 /* SNAKE */
-const cv=$('canvas'),cx=cv.getContext('2d'),N=20,S=20;
-let body=[],food={x:12,y:10},dir={x:1,y:0},next={x:1,y:0},snakeTimer=null,snakeOn=false,snakeScore=0;
+const cv=$('snakeCanvas'),cx=cv.getContext('2d'),N=20,S=20;
+let body=[],food={x:12,y:10},dir={x:1,y:0},next={x:1,y:0},snakeOn=false,snakeScore=0;
 $('sb').textContent=best('naSnake');
-function drawSnake(){
-cx.fillStyle='#080d18';cx.fillRect(0,0,400,400);
-cx.strokeStyle='#17243a';for(let i=0;i<=N;i++){cx.beginPath();cx.moveTo(i*S,0);cx.lineTo(i*S,400);cx.stroke();cx.beginPath();cx.moveTo(0,i*S);cx.lineTo(400,i*S);cx.stroke()}
-cx.fillStyle='#ff65c8';cx.shadowColor='#ff65c8';cx.shadowBlur=12;cx.fillRect(food.x*S+3,food.y*S+3,S-6,S-6);cx.shadowBlur=0;
-body.forEach((p,i)=>{cx.fillStyle=i===0?'#61f5ff':'#32b8b8';cx.fillRect(p.x*S+2,p.y*S+2,S-4,S-4)});
-if(!snakeOn){cx.fillStyle='white';cx.font='18px Arial';cx.textAlign='center';cx.fillText('PRESS START TO PLAY',200,215)}
-}
-function endSnake(){snakeOn=false;clearInterval(snakeTimer);$('sstart').disabled=false;$('sstart').textContent='PLAY AGAIN';$('smsg').textContent='Game over! Score: '+snakeScore;if(snakeScore>best('naSnake')){save('naSnake',snakeScore);$('sb').textContent=snakeScore;$('smsg').textContent+=' — NEW BEST!'}drawSnake()}
-function snakeStep(){
-dir=next;let h={x:body[0].x+dir.x,y:body[0].y+dir.y},ate=h.x===food.x&&h.y===food.y;
-if(h.x<0||h.y<0||h.x>=N||h.y>=N||body.slice(0,ate?body.length:body.length-1).some(p=>p.x===h.x&&p.y===h.y)){endSnake();return}
-body.unshift(h);
-if(ate){snakeScore++;$('ss').textContent=snakeScore;do{food={x:Math.floor(Math.random()*N),y:Math.floor(Math.random()*N)}}while(body.some(p=>p.x===food.x&&p.y===food.y))}else body.pop();
-drawSnake()
-}
+function drawSnake(){cx.fillStyle='#080814';cx.fillRect(0,0,400,400);cx.strokeStyle='#20203a';for(let i=0;i<=N;i++){cx.beginPath();cx.moveTo(i*S,0);cx.lineTo(i*S,400);cx.stroke();cx.beginPath();cx.moveTo(0,i*S);cx.lineTo(400,i*S);cx.stroke()}cx.fillStyle='#ff64d8';cx.fillRect(food.x*S+3,food.y*S+3,S-6,S-6);body.forEach((p,i)=>{cx.fillStyle=i===0?'#69f5ff':'#32b8b8';cx.fillRect(p.x*S+2,p.y*S+2,S-4,S-4)});if(!snakeOn){cx.fillStyle='white';cx.font='17px Arial';cx.textAlign='center';cx.fillText('PRESS START TO PLAY',200,215)}}
+function endSnake(){snakeOn=false;$('sstart').disabled=false;$('sstart').textContent='PLAY AGAIN';$('smsg').textContent='Game over! Score: '+snakeScore;if(snakeScore>best('naSnake')){save('naSnake',snakeScore);$('sb').textContent=snakeScore;$('smsg').textContent+=' — NEW BEST!'}drawSnake()}
+function snakeStep(){dir=next;let h={x:body[0].x+dir.x,y:body[0].y+dir.y},ate=h.x===food.x&&h.y===food.y;if(h.x<0||h.y<0||h.x>=N||h.y>=N||body.slice(0,ate?body.length:body.length-1).some(p=>p.x===h.x&&p.y===h.y)){endSnake();stopTimers();return}body.unshift(h);if(ate){snakeScore++;$('ss').textContent=snakeScore;do{food={x:Math.floor(Math.random()*N),y:Math.floor(Math.random()*N)}}while(body.some(p=>p.x===food.x&&p.y===food.y))}else body.pop();drawSnake()}
 function turn(x,y){if(x===-dir.x&&y===-dir.y)return;next={x,y}}
-$('sstart').onclick=()=>{clearInterval(snakeTimer);body=[{x:5,y:10},{x:4,y:10},{x:3,y:10}];dir={x:1,y:0};next={x:1,y:0};food={x:12,y:10};snakeScore=0;$('ss').textContent=0;$('smsg').textContent='Good luck!';snakeOn=true;$('sstart').disabled=true;$('sstart').textContent='PLAYING...';snakeTimer=setInterval(snakeStep,130);drawSnake()};
-document.addEventListener('keydown',e=>{if(current!=='snake'||!snakeOn)return;let k={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};if(k[e.key]){e.preventDefault();turn(...k[e.key])}});
+$('sstart').onclick=()=>{stopTimers();body=[{x:5,y:10},{x:4,y:10},{x:3,y:10}];dir={x:1,y:0};next={x:1,y:0};food={x:12,y:10};snakeScore=0;$('ss').textContent=0;snakeOn=true;$('sstart').disabled=true;$('sstart').textContent='PLAYING...';interval(snakeStep,130);drawSnake()};
+document.addEventListener('keydown',e=>{if(current==='snake'&&snakeOn){let k={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};if(k[e.key]){e.preventDefault();turn(...k[e.key])}}});
 
-/* TIC-TAC-TOE */
+/* TIC TAC TOE */
 let cells=[],player='X',active=true,xwins=0,owins=0;
 function resetTTT(){cells=Array(9).fill('');player='X';active=true;$('turnLabel').textContent='X';$('tmsg').textContent='X goes first.';renderTTT()}
-function renderTTT(){let b=$('board');b.innerHTML='';cells.forEach((v,i)=>{let el=document.createElement('button');el.className='cell';el.textContent=v;el.setAttribute('aria-label','Cell '+(i+1));el.onclick=()=>playTTT(i);b.appendChild(el)})}
-function playTTT(i){
-if(!active||cells[i])return;cells[i]=player;renderTTT();
-let lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-if(lines.some(l=>l.every(n=>cells[n]===player))){$('tmsg').textContent=player+' wins! 🎉';if(player==='X')$('xw').textContent=++xwins;else $('ow').textContent=++owins;active=false;return}
-if(cells.every(Boolean)){$('tmsg').textContent="It's a draw!";active=false;return}
-player=player==='X'?'O':'X';$('turnLabel').textContent=player;$('tmsg').textContent=player+"'s turn";
-}
+function renderTTT(){let b=$('board');b.innerHTML='';cells.forEach((v,i)=>{let el=document.createElement('button');el.className='cell';el.textContent=v;el.onclick=()=>playTTT(i);b.appendChild(el)})}
+function playTTT(i){if(!active||cells[i])return;cells[i]=player;renderTTT();let lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];if(lines.some(l=>l.every(n=>cells[n]===player))){$('tmsg').textContent=player+' wins! 🎉';if(player==='X')$('xw').textContent=++xwins;else $('ow').textContent=++owins;active=false;return}if(cells.every(Boolean)){$('tmsg').textContent="It's a draw!";active=false;return}player=player==='X'?'O':'X';$('turnLabel').textContent=player;$('tmsg').textContent=player+"'s turn"}
 resetTTT();
 
-/* MEMORY MATCH */
-const symbols=['🎮','🚀','👾','💎','🔥','⭐','🛸','🎯'];
-let deck=[],flipped=[],pairsFound=0,moves=0,locked=false,mbest=best('naMemory');
-$('mb').textContent=mbest||'—';
-function startMemory(){
-deck=[...symbols,...symbols].sort(()=>Math.random()-.5);flipped=[];pairsFound=0;moves=0;locked=false;
-$('moves').textContent=0;$('pairs').textContent='0/8';$('mmsg').textContent='Find all eight pairs!';
-let b=$('memoryBoard');b.innerHTML='';
-deck.forEach((sym,i)=>{let el=document.createElement('button');el.className='memcard';el.textContent='?';el.setAttribute('aria-label','Hidden card');el.onclick=()=>flipCard(i,el);b.appendChild(el)});
+/* MEMORY */
+const symbols=['🎮','🚀','👾','💎','🔥','⭐','🛸','🎯'];let deck=[],flipped=[],pairsFound=0,moves=0,locked=false,mbest=best('naMemory');$('mb').textContent=mbest||'—';
+function startMemory(){deck=[...symbols,...symbols].sort(()=>Math.random()-.5);flipped=[];pairsFound=0;moves=0;locked=false;$('moves').textContent=0;$('pairs').textContent='0/8';$('mmsg').textContent='Find all eight pairs!';let b=$('memoryBoard');b.innerHTML='';deck.forEach((sym,i)=>{let el=document.createElement('button');el.className='memcard';el.textContent='?';el.onclick=()=>flipCard(i,el);b.appendChild(el)})}
+function flipCard(i,el){if(locked||el.classList.contains('matched')||flipped.some(f=>f.i===i))return;el.textContent=deck[i];flipped.push({i,el});if(flipped.length<2)return;moves++;$('moves').textContent=moves;if(deck[flipped[0].i]===deck[flipped[1].i]){flipped.forEach(f=>f.el.classList.add('matched'));flipped=[];pairsFound++;$('pairs').textContent=pairsFound+'/8';if(pairsFound===8){$('mmsg').textContent='Completed in '+moves+' moves!';if(!mbest||moves<mbest){mbest=moves;save('naMemory',moves);$('mb').textContent=moves}}}else{locked=true;let old=flipped;flipped=[];later(()=>{old.forEach(f=>f.el.textContent='?');locked=false},700)}}
+startMemory();
+
+/* SPACE SHOOTER */
+const sc=$('spaceCanvas'),sx=sc.getContext('2d');let ship=180,bullets=[],enemies=[],spaceOn=false,spScore=0,spLives=3,spTick=0;
+function drawSpace(){sx.fillStyle='#080814';sx.fillRect(0,0,400,420);for(let i=0;i<40;i++){sx.fillStyle='#b3caff';sx.fillRect((i*83)%400,(i*137)%420,2,2)}sx.fillStyle='#69f5ff';sx.beginPath();sx.moveTo(ship+20,370);sx.lineTo(ship,402);sx.lineTo(ship+40,402);sx.closePath();sx.fill();sx.fillStyle='#ff64d8';bullets.forEach(b=>sx.fillRect(b.x,b.y,4,12));sx.fillStyle='#ff7777';enemies.forEach(e=>{sx.fillRect(e.x,e.y,24,20);sx.fillRect(e.x+4,e.y-4,16,4)})}
+function moveShip(d){ship=Math.max(0,Math.min(360,ship+d*20));if(!spaceOn)drawSpace()}
+function shoot(){if(spaceOn)bullets.push({x:ship+18,y:365})}
+function spaceFrame(){if(!spaceOn)return;spTick++;if(spTick%32===0)enemies.push({x:Math.random()*370,y:0});bullets.forEach(b=>b.y-=7);enemies.forEach(e=>e.y+=2);for(let i=enemies.length-1;i>=0;i--){let e=enemies[i],hit=bullets.some(b=>b.x>=e.x&&b.x<=e.x+24&&b.y<=e.y+20&&b.y>=e.y-12);if(hit){enemies.splice(i,1);spScore++;$('spScore').textContent=spScore;bullets=bullets.filter(b=>!(b.x>=e.x&&b.x<=e.x+24&&b.y<=e.y+20&&b.y>=e.y-12))}else if(e.y>390){enemies.splice(i,1);spLives--;$('spLives').textContent=spLives;if(spLives<=0){spaceOn=false;$('spMsg').textContent='Game over! Score: '+spScore;drawSpace();return}}}bullets=bullets.filter(b=>b.y>0);drawSpace();later(spaceFrame,40)}
+$('spStart').onclick=()=>{stopTimers();ship=180;bullets=[];enemies=[];spScore=0;spLives=3;spTick=0;spaceOn=true;$('spScore').textContent=0;$('spLives').textContent=3;$('spMsg').textContent='Shoot the enemies!';drawSpace();spaceFrame()};
+document.addEventListener('keydown',e=>{if(current==='space'&&spaceOn){if(e.key==='ArrowLeft')moveShip(-1);if(e.key==='ArrowRight')moveShip(1);if(e.code==='Space'){e.preventDefault();shoot()}}});
+
+/* BRICK BREAKER */
+const bc=$('brickCanvas'),bx=bc.getContext('2d');let paddle=155,ball={x:200,y:330,dx:3,dy:-3},bricks=[],brickOn=false,brScore=0,brLives=3;
+function initBrick(){bricks=[];for(let r=0;r<4;r++)for(let c=0;c<8;c++)bricks.push({x:8+c*49,y:35+r*25,alive:true})}
+function drawBrick(){bx.fillStyle='#080814';bx.fillRect(0,0,400,400);bricks.forEach((b,i)=>{if(b.alive){bx.fillStyle=['#69f5ff','#a68bff','#ff64d8','#ffc46b'][Math.floor(i/8)];bx.fillRect(b.x,b.y,43,17)}});bx.fillStyle='#fff';bx.beginPath();bx.arc(ball.x,ball.y,7,0,Math.PI*2);bx.fill();bx.fillStyle='#69f5ff';bx.fillRect(paddle,370,90,10)}
+function movePaddle(d){paddle=Math.max(0,Math.min(310,paddle+d));if(!brickOn)drawBrick()}
+function brickFrame(){if(!brickOn)return;ball.x+=ball.dx;ball.y+=ball.dy;if(ball.x<7||ball.x>393)ball.dx*=-1;if(ball.y<7)ball.dy=Math.abs(ball.dy);if(ball.dy>0&&ball.y>360&&ball.y<382&&ball.x>paddle-5&&ball.x<paddle+95){ball.dy=-Math.abs(ball.dy);ball.dx+=(ball.x-(paddle+45))*.035}for(let b of bricks){if(b.alive&&ball.x>b.x&&ball.x<b.x+43&&ball.y>b.y&&ball.y<b.y+17){b.alive=false;ball.dy*=-1;brScore++;$('brScore').textContent=brScore;break}}if(bricks.every(b=>!b.alive)){brickOn=false;$('brMsg').textContent='You win! Score: '+brScore;drawBrick();return}if(ball.y>400){brLives--;$('brLives').textContent=brLives;if(brLives<=0){brickOn=false;$('brMsg').textContent='Game over! Score: '+brScore;drawBrick();return}ball={x:200,y:330,dx:3,dy:-3}}drawBrick();later(brickFrame,20)}
+$('brStart').onclick=()=>{stopTimers();paddle=155;ball={x:200,y:330,dx:3,dy:-3};brScore=0;brLives=3;$('brScore').textContent=0;$('brLives').textContent=3;$('brMsg').textContent='Break all bricks!';initBrick();brickOn=true;drawBrick();brickFrame()};
+bc.addEventListener('pointermove',e=>{if(current==='brick'){let r=bc.getBoundingClientRect();paddle=Math.max(0,Math.min(310,(e.clientX-r.left)*400/r.width-45));if(!brickOn)drawBrick()}});
+document.addEventListener('keydown',e=>{if(current==='brick'){if(e.key==='ArrowLeft')movePaddle(-20);if(e.key==='ArrowRight')movePaddle(20)}});
+
+/* WHACK A MOLE */
+let whScore=0,whTime=20,whOn=false,whPos=-1;
+function makeWhack(){let b=$('whackBoard');b.innerHTML='';for(let i=0;i<9;i++){let x=document.createElement('button');x.className='hole';x.textContent='🕳️';x.onclick=()=>{if(whOn&&i===whPos){whScore++;$('whScore').textContent=whScore;whPos=-1;x.textContent='🕳️'}};b.appendChild(x)}}
+$('whStart').onclick=()=>{stopTimers();whScore=0;whTime=20;whOn=true;whPos=-1;$('whScore').textContent=0;$('whTime').textContent=20;$('whMsg').textContent='Catch as many as you can!';let tick=interval(()=>{whTime--;$('whTime').textContent=whTime;if(whTime<=0){whOn=false;whPos=-1;makeWhack();$('whMsg').textContent='Time up! Score: '+whScore;stopTimers()}},1000);interval(()=>{if(!whOn)return;makeWhack();whPos=Math.floor(Math.random()*9);$('whackBoard').children[whPos].textContent='🐹'},650)};
+
+/* 2048 */
+let nums=[],numScore=0;
+function addNum(){let empty=nums.map((v,i)=>v? -1:i).filter(i=>i>=0);if(empty.length){let i=empty[Math.floor(Math.random()*empty.length)];nums[i]=Math.random()<.9?2:4}}
+function initNumber(){nums=Array(16).fill(0);numScore=0;addNum();addNum();$('numScore').textContent=0;$('numMsg').textContent='Combine equal numbers to reach 2048.';renderNumber()}
+function renderNumber(){$('numBest').textContent=best('na2048');let b=$('numberBoard');b.innerHTML='';nums.forEach(v=>{let el=document.createElement('button');el.className='tile'+(v?' filled':'');el.textContent=v||'';b.appendChild(el)})}
+function numberMove(d){
+let old=nums.slice();
+for(let line=0;line<4;line++){let ids=[];for(let j=0;j<4;j++){if(d==='left')ids.push(line*4+j);if(d==='right')ids.push(line*4+3-j);if(d==='up')ids.push(j*4+line);if(d==='down')ids.push((3-j)*4+line)}
+let vals=ids.map(i=>nums[i]).filter(Boolean);for(let j=0;j<vals.length-1;j++)if(vals[j]===vals[j+1]){vals[j]*=2;numScore+=vals[j];vals.splice(j+1,1)}while(vals.length<4)vals.push(0);ids.forEach((id,j)=>nums[id]=vals[j])}
+if(nums.some((v,i)=>v!==old[i]))addNum();$('numScore').textContent=numScore;if(numScore>best('na2048'))save('na2048',numScore);renderNumber();if(nums.includes(2048))$('numMsg').textContent='You reached 2048! Amazing!';else if(!nums.some(v=>v===0)&&!nums.some((v,i)=>i%4<3&&v===nums[i+1]||i<12&&v===nums[i+4]))$('numMsg').textContent='No moves left! Start a new puzzle.'
 }
-function flipCard(i,el){
-if(locked||el.classList.contains('matched')||flipped.some(f=>f.i===i))return;
-el.textContent=deck[i];flipped.push({i,el});if(flipped.length<2)return;
-moves++;$('moves').textContent=moves;
-if(deck[flipped[0].i]===deck[flipped[1].i]){
-flipped.forEach(f=>{f.el.classList.add('matched');f.el.setAttribute('aria-label','Matched '+deck[f.i])});
-flipped=[];pairsFound++;$('pairs').textContent=pairsFound+'/8';
-if(pairsFound===8){$('mmsg').textContent='Completed in '+moves+' moves!';if(!mbest||moves<mbest){mbest=moves;save('naMemory',moves);$('mb').textContent=moves}}
-}else{locked=true;let old=flipped;flipped=[];setTimeout(()=>{old.forEach(f=>f.el.textContent='?');locked=false},700)}
-}
-startMemory();drawSnake();
+document.addEventListener('keydown',e=>{if(current==='number'){let k={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'};if(k[e.key]){e.preventDefault();numberMove(k[e.key])}}});
+initNumber();
+
+/* ROCK PAPER SCISSORS */
+let rYou=0,rCpu=0;
+function playRPS(v){let opts=['✊','✋','✌️'],c=opts[Math.floor(Math.random()*3)];$('rResult').textContent='You '+v+'  VS  '+c+' Computer';if(v===c)$('rMsg').textContent="It's a draw!";else if((v==='✊'&&c==='✌️')||(v==='✋'&&c==='✊')||(v==='✌️'&&c==='✋')){rYou++;$('rMsg').textContent='You win this round! 🎉'}else{rCpu++;$('rMsg').textContent='Computer wins this round!'}$('rYou').textContent=rYou;$('rCpu').textContent=rCpu}
+drawSnake();drawSpace();initBrick();
 </script>
 </body>
 </html>
