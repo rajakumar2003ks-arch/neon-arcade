@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEON ARCADE | Play Free Games</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090b16;color:#f4f5ff;font-family:Arial,sans-serif}
+header{padding:22px 7%;display:flex;justify-content:space-between;
+align-items:center;border-bottom:1px solid #24263c}
+.logo{font-size:23px;font-weight:900;color:#62f5ff}
+nav a{color:#ddd;text-decoration:none;margin-left:20px}
+.hero{text-align:center;padding:65px 20px 40px;
+background:radial-gradient(ellipse at top,#25235c 0%,#090b16 70%)}
+.hero h1{font-size:clamp(38px,7vw,70px);margin:10px 0}
+.hero h1 span{color:#62f5ff}
+.hero p{color:#b5b8d0;line-height:1.7}
+button{background:#62f5ff;color:#090b16;border:0;border-radius:9px;
+padding:13px 22px;font-weight:bold;cursor:pointer}
+button:hover{filter:brightness(1.1);transform:translateY(-1px)}
+section{padding:35px 7%}
+h2{margin-top:0}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:#14172a;border:1px solid #292d49;border-radius:15px;
+padding:22px}
+.emoji{font-size:38px}
+.card p,.muted{color:#b5b8d0;line-height:1.6}
+.game{max-width:700px;margin:auto;background:#14172a;
+border:1px solid #303654;border-radius:16px;padding:22px}
+.stats{display:flex;justify-content:space-between;gap:12px;margin:18px 0}
+.stat{background:#090b16;padding:14px;border-radius:10px;flex:1;text-align:center}
+.stat strong{display:block;font-size:25px;color:#62f5ff;margin-top:6px}
+#arena{height:280px;position:relative;overflow:hidden;background:#090b16;
+border:1px solid #303654;border-radius:12px}
+#target{display:none;position:absolute;width:48px;height:48px;border-radius:50%;
+background:#62f5ff;border:5px solid #fff;box-shadow:0 0 24px #62f5ff;
+cursor:pointer;touch-action:manipulation}
+.center{text-align:center}
+footer{text-align:center;padding:30px;color:#8d92b2;border-top:1px solid #24263c}
+@media(max-width:500px){header{padding:18px 5%}nav a{margin-left:9px;font-size:13px}
+section{padding:28px 5%}.game{padding:14px}#arena{height:250px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">⚡ NEON ARCADE</div>
+  <nav><a href="#games">Games</a><a href="#play">Play</a></nav>
+</header>
+
+<div class="hero">
+  <p>YOUR NEXT LEVEL STARTS HERE</p>
+  <h1>PLAY <span>BEYOND</span><br>LIMITS.</h1>
+  <p>Free browser gaming. No downloads. Just pure fun.</p>
+  <button onclick="document.querySelector('#play').scrollIntoView({behavior:'smooth'})">
+    PLAY NOW 🎮
+  </button>
+</div>
+
+<section id="games">
+  <h2>🎮 ARCADE ZONE</h2>
+  <div class="games">
+    <div class="card">
+      <div class="emoji">🎯</div>
+      <h3>Neon Click Rush</h3>
+      <p>Hit the glowing target and beat your high score.</p>
+      <button onclick="document.querySelector('#play').scrollIntoView({behavior:'smooth'})">Play Game</button>
+    </div>
+    <div class="card">
+      <div class="emoji">🧠</div>
+      <h3>Brain Master</h3>
+      <p>A puzzle game coming soon.</p>
+    </div>
+    <div class="card">
+      <div class="emoji">🚀</div>
+      <h3>Space Runner</h3>
+      <p>An endless space adventure coming soon.</p>
+    </div>
+  </div>
+</section>
+
+<section id="play">
+  <div class="game">
+    <h2>🎯 NEON CLICK RUSH</h2>
+    <p class="muted">Click the glowing circle as many times as you can in 15 seconds!</p>
+    <div class="stats">
+      <div class="stat">SCORE<strong id="score">0</strong></div>
+      <div class="stat">TIME<strong id="time">15</strong></div>
+      <div class="stat">BEST<strong id="best">0</strong></div>
+    </div>
+    <div id="arena">
+      <button id="target" aria-label="Hit target"></button>
+    </div>
+    <p class="center" style="margin-top:20px">
+      <button id="start">START GAME</button>
+    </p>
+    <p id="message" class="center muted" aria-live="polite">Ready, player one?</p>
+  </div>
+</section>
+
+<section class="center">
+  <h2>READY TO LEVEL UP?</h2>
+  <p class="muted">Play free. Beat your record. Challenge yourself.</p>
+</section>
+
+<footer>© 2026 NEON ARCADE · Made for gamers ⚡</footer>
+
+<script>
+const target = document.getElementById('target');
+const arena = document.getElementById('arena');
+const scoreText = document.getElementById('score');
+const timeText = document.getElementById('time');
+const bestText = document.getElementById('best');
+const message = document.getElementById('message');
+const start = document.getElementById('start');
+
+let score = 0, time = 15, playing = false, timer = null;
+let best = 0;
+
+try { best = Number(localStorage.getItem('neonArcadeBest')) || 0; }
+catch(e) {}
+bestText.textContent = best;
+
+function moveTarget() {
+  const maxX = Math.max(0, arena.clientWidth - target.offsetWidth);
+  const maxY = Math.max(0, arena.clientHeight - target.offsetHeight);
+  target.style.left = Math.random() * maxX + 'px';
+  target.style.top = Math.random() * maxY + 'px';
+}
+
+function endGame() {
+  playing = false;
+  clearInterval(timer);
+  target.style.display = 'none';
+  start.disabled = false;
+  start.textContent = 'PLAY AGAIN';
+  message.textContent = 'Time up! Your score: ' + score;
+  if (score > best) {
+    best = score;
+    bestText.textContent = best;
+    try { localStorage.setItem('neonArcadeBest', best); } catch(e) {}
+    message.textContent += ' — NEW HIGH SCORE!';
+  }
+}
+
+start.addEventListener('click', () => {
+  if (playing) return;
+  score = 0;
+  time = 15;
+  playing = true;
+  scoreText.textContent = score;
+  timeText.textContent = time;
+  message.textContent = 'Go, go, go!';
+  start.disabled = true;
+  target.style.display = 'block';
+  moveTarget();
+
+  timer = setInterval(() => {
+    time--;
+    timeText.textContent = time;
+    if (time <= 0) endGame();
+  }, 1000);
+});
+
+target.addEventListener('click', () => {
+  if (!playing) return;
+  score++;
+  scoreText.textContent = score;
+  moveTarget();
+});
+</script>
+</body>
+</html>
