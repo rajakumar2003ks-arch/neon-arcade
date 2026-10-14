@@ -5,6 +5,25 @@
 <meta name="google-site-verification" content="s-Zipuh58Cm23SWZJhI-BSglgjo94qtutYtiLuvBTZA" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://rajakumar2003ks-arch.github.io/neon-arcade/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Neon Arcade">
+<meta property="og:title" content="Neon Arcade | 9 Free Online Browser Games">
+<meta property="og:description" content="Play 9 free browser games including Snake, 2048, Space Shooter, Memory Match and more. No download needed.">
+<meta property="og:url" content="https://rajakumar2003ks-arch.github.io/neon-arcade/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Neon Arcade | Free Online Games">
+<meta name="twitter:description" content="Play 9 free browser games. No download needed.">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"Neon Arcade",
+  "url":"https://rajakumar2003ks-arch.github.io/neon-arcade/",
+  "description":"Play free browser-based arcade, puzzle, reaction and strategy games on Neon Arcade."
+}
+</script>
 <meta name="theme-color" content="#080814">
 <meta name="description" content="Play 9 free online arcade games at Neon Arcade. Enjoy Snake, Tic-Tac-Toe, Memory Match, Space Shooter, 2048 and more.">
 <meta name="robots" content="index,follow">
@@ -81,14 +100,14 @@ footer a{color:var(--cyan);margin:0 7px}
 <body>
 <header>
 <a class="logo" href="#home">⚡ NEON ARCADE</a>
-<nav><a href="#games">Games</a><a href="#rewards">Rewards</a><a href="#play">Play</a><a href="#about">About</a></nav>
+<nav><a href="#games">Games</a><a href="#guide">How to Play</a><a href="#rewards">Rewards</a><a href="#play">Play</a><a href="#about">About</a></nav>
 </header>
 
 <main>
 <div class="hero" id="home">
 <span class="tag">✦ YOUR FREE GAMING UNIVERSE</span>
 <h1>PLAY <span class="gradient">BEYOND</span><br>LIMITS.</h1>
-<p class="muted">9 free games. Earn XP, unlock badges and beat your best scores.</p>
+<p class="muted">Play 9 free browser games. No download needed. Earn XP, unlock badges and beat your best scores.</p>
 <button class="primary" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">EXPLORE GAMES ↓</button>
 </div>
 
@@ -126,6 +145,23 @@ footer a{color:var(--cyan);margin:0 7px}
 </div><p id="noResults" class="note hidden">No games found. Try another search.</p>
 </section>
 
+<section id="guide">
+<div class="about">
+<h2>How to Play Free Games on Neon Arcade</h2>
+<p class="muted">Choose any game and press Play Now. The games run in your browser, so you do not need to install an app or create an account. On a computer, use the keyboard or on-screen controls where available. On a phone, use the on-screen buttons and tap controls.</p>
+<div class="info-grid">
+<div class="info-card"><h3>🎯 Reaction Games</h3><p class="muted">In Click Rush, tap the target before the 15-second timer ends. In Whack-a-Mole, tap the mole before it disappears. Try to improve your personal best.</p></div>
+<div class="info-card"><h3>🧩 Puzzle Games</h3><p class="muted">In Memory Match, reveal two cards at a time and remember their positions. In 2048, combine equal number tiles using the direction buttons or arrow keys.</p></div>
+<div class="info-card"><h3>🕹️ Arcade Games</h3><p class="muted">In Neon Snake, collect food and avoid walls and your tail. In Space Shooter, move and fire at enemies. In Brick Breaker, keep the ball bouncing with the paddle.</p></div>
+</div>
+<h3>Frequently Asked Questions</h3>
+<h4>Are Neon Arcade games free?</h4><p class="muted">Yes. The games on this page are free to play in your browser.</p>
+<h4>Do I need to download anything?</h4><p class="muted">No app download or account is required to play these browser games.</p>
+<h4>Are my scores saved online?</h4><p class="muted">No. Personal XP and supported best scores are saved in this browser on your device. They are not shared across devices or shown on a public leaderboard.</p>
+<h4>Can I play on a phone?</h4><p class="muted">The page is designed to adapt to smaller screens. Some games have on-screen buttons. If a game control does not respond on your device, refresh the page and try again.</p>
+</div>
+</section>
+
 <section id="play">
 <div class="panel">
 <div class="gamehead"><h2 id="gameTitle">🎯 Click Rush</h2><button class="secondary" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">← All Games</button></div>
@@ -141,11 +177,11 @@ footer a{color:var(--cyan);margin:0 7px}
 </div>
 <div id="tttGame" class="hidden">
 <div class="stats"><div class="stat">TURN<strong id="turnLabel">X</strong></div><div class="stat">X WINS<strong id="xw">0</strong></div><div class="stat">O WINS<strong id="ow">0</strong></div></div>
-<div class="board" id="board"></div><p id="tmsg" class="note">X goes first!</p><div class="controls"><button class="primary" onclick="resetTTT()">NEW ROUND</button></div>
+<div class="board" id="board" aria-label="Tic-Tac-Toe board"></div><p id="tmsg" class="note">X goes first!</p><div class="controls"><button class="primary" onclick="resetTTT()">NEW ROUND</button></div>
 </div>
 <div id="memoryGame" class="hidden">
 <div class="stats"><div class="stat">MOVES<strong id="moves">0</strong></div><div class="stat">PAIRS<strong id="pairs">0/8</strong></div><div class="stat">BEST<strong id="mb">—</strong></div></div>
-<div class="memory" id="memoryBoard"></div><div class="controls"><button class="primary" onclick="startMemory()">RESTART</button></div><p id="mmsg" class="note">Find all pairs!</p>
+<div class="memory" id="memoryBoard" aria-label="Memory Match cards"></div><div class="controls"><button class="primary" onclick="startMemory()">RESTART</button></div><p id="mmsg" class="note">Find all pairs!</p>
 </div>
 <div id="spaceGame" class="hidden">
 <div class="stats"><div class="stat">SCORE<strong id="spScore">0</strong></div><div class="stat">LIVES<strong id="spLives">3</strong></div></div><canvas id="spaceCanvas" width="400" height="420"></canvas>
@@ -159,7 +195,7 @@ footer a{color:var(--cyan);margin:0 7px}
 <div class="stats"><div class="stat">SCORE<strong id="whScore">0</strong></div><div class="stat">TIME<strong id="whTime">20</strong></div></div><div id="whackBoard"></div><div class="controls"><button class="primary" id="whStart">START GAME</button></div><p id="whMsg" class="note">Catch the mole in 20 seconds!</p>
 </div>
 <div id="numberGame" class="hidden">
-<div class="stats"><div class="stat">SCORE<strong id="numScore">0</strong></div><div class="stat">BEST<strong id="numBest">0</strong></div></div><div id="numberBoard"></div>
+<div class="stats"><div class="stat">SCORE<strong id="numScore">0</strong></div><div class="stat">BEST<strong id="numBest">0</strong></div></div><div id="numberBoard" aria-label="2048 game board"></div>
 <div class="controls"><button class="secondary" onclick="numberMove('up')">↑</button></div><div class="controls"><button class="secondary" onclick="numberMove('left')">←</button><button class="secondary" onclick="numberMove('down')">↓</button><button class="secondary" onclick="numberMove('right')">→</button></div><div class="controls"><button class="primary" onclick="initNumber()">NEW PUZZLE</button></div><p id="numMsg" class="note">Join matching numbers.</p>
 </div>
 <div id="rpsGame" class="hidden">
@@ -169,10 +205,10 @@ footer a{color:var(--cyan);margin:0 7px}
 </section>
 
 <section id="about"><div class="about"><h2>About Neon Arcade ⚡</h2><p class="muted">Neon Arcade is a free mini-game website. Play directly in your browser on a phone or computer. XP, achievements and high scores are stored locally in this browser. They are not a shared online leaderboard.</p></div></section>
-<section id="contact"><div class="about"><h2>Contact</h2><p class="muted">Feedback is welcome. Add a dedicated contact email here when you have one. Avoid publishing personal phone numbers or your home address.</p></div></section>
-<section id="privacy"><div class="about"><h2>Privacy</h2><p class="muted">This version does not require an account. Game scores and XP are stored in browser local storage. Clearing browser data may erase them. No advertising or analytics scripts are included.</p></div></section>
+<section id="contact"><div class="about"><h2>Contact</h2><p class="muted">Have feedback, found a bug, or want to suggest a game? You can open a public issue on the project repository. Please do not post passwords, private information, phone numbers, or your home address. <a href="https://github.com/rajakumar2003ks-arch/neon-arcade/issues" target="_blank" rel="noopener noreferrer">Send feedback on GitHub</a>.</p></div></section>
+<section id="privacy"><div class="about"><h2>Privacy</h2><p class="muted">Neon Arcade does not require an account to play. XP and supported personal scores are stored in your browser using local storage; clearing browser data may erase them. This page currently has no Google Analytics or advertising script installed. If analytics or advertising is added later, this notice must be updated to explain the services used and any relevant cookie or advertising choices.</p></div></section>
 </main>
-<footer>⚡ NEON ARCADE · Free browser games<br><p><a href="#games">Games</a><a href="#rewards">Rewards</a><a href="#about">About</a><a href="#contact">Contact</a><a href="#privacy">Privacy</a></p>© <span id="year"></span> Neon Arcade</footer>
+<footer>⚡ NEON ARCADE · Free browser games<br><p><a href="#games">Games</a><a href="#guide">How to Play</a><a href="#rewards">Rewards</a><a href="#about">About</a><a href="#contact">Contact</a><a href="#privacy">Privacy</a></p>© <span id="year"></span> Neon Arcade</footer>
 
 <script>
 const $=id=>document.getElementById(id);
@@ -212,7 +248,7 @@ function awardXP(amount,reason){
 profile.xp+=amount;updateRewards();$('rewardMsg').textContent='+'+amount+' XP · '+reason; 
 }
 function finishGame(score=0,game='game'){
-profile.played++;profile.won++;profile.best=Math.max(profile.best,score||0);
+profile.played++;profile.best=Math.max(profile.best,score||0);
 awardXP(10,'Game completed: '+game);
 }
 function dailyCheck(score){
